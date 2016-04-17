@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author gabri
+ * @author Gabriel e Flávio
  */
 public class Filtro implements Filter {
 
@@ -30,13 +30,18 @@ public class Filtro implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String url = req.getRequestURI();
         String usuario = getUsuario(req);
-        System.out.println("O usuario " + usuario + " estÃ¡ acessando a URL " + url);
+        System.out.println("O usuario " + usuario + " está acessando a URL " + url);
         chain.doFilter(request, response);
     }
     
     public String getUsuario(HttpServletRequest req){
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
-        if(usuario == null) return "<deslogado>";
+        
+        //Verifica se a sessão existe. Se não existir informa que o usuário está deslogado.
+        if(usuario == null){
+            return "<deslogado>";
+        }
+        
         return usuario.getNome();
     }
 
