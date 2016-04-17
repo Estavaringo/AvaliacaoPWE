@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author gabri
+ * @author Flávio e Gabriel
  */
 public class UsuarioDAO {
     
@@ -26,7 +26,7 @@ public class UsuarioDAO {
         try {
             Usuario obj = null;
             bd.conectar();
-            String strSQL = "SELECT USUA_NM, USUA_DT, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_EMAIL = ? AND USUA_SENHA = ?";
+            String strSQL = "SELECT USUA_NM, USUA_EMAIL, USUA_DT, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_EMAIL = ? AND USUA_SENHA = ?";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setString(1, email);
             p.setString(2, senha);
@@ -34,6 +34,7 @@ public class UsuarioDAO {
             if (rs.next()) {
                 obj = new Usuario();
                 obj.setNome(rs.getString("USUA_NM"));
+                obj.setEmail(rs.getString("USUA_EMAIL"));
                 obj.setNome(rs.getString("USUA_DT"));
                 obj.setNome(rs.getString("USUA_ENDE"));
                 if(rs.getString("USUA_COR").equals("1")){
@@ -41,8 +42,7 @@ public class UsuarioDAO {
                 }else{
                     obj.setCorretor(false);
                 }
-                obj.setEmail(email);
-                obj.setSenha(senha);
+                
                 p.close();
                 bd.desconectar();
                 return obj;
