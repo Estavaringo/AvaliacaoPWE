@@ -26,7 +26,7 @@ public class Controller extends HttpServlet {
             throw new IllegalArgumentException("Você esqueceu de passar a tarefa!");
         }
 
-        tarefa = "ifsp.pwe.gerenciador.servlet." + tarefa;
+        tarefa = "ifsp.pwe.prova.servlet." + tarefa;
 
         try {
             Class<?> tipo = Class.forName(tarefa);
@@ -34,7 +34,7 @@ public class Controller extends HttpServlet {
 
             if (!VerificaPermissao.executa(req, resp, instancia)) {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("Negado.html");
-                requestDispatcher.forward(req, resp);;
+                requestDispatcher.forward(req, resp);
             } else {
 
                 String pagina = instancia.executa(req, resp);
@@ -42,8 +42,12 @@ public class Controller extends HttpServlet {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher(pagina);
                 requestDispatcher.forward(req, resp);
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ServletException | IOException e) {
-            throw new ServletException(e);
+        } catch (ClassNotFoundException ex) {
+            throw new ServletException(ex);
+        } catch (InstantiationException ex) {
+            throw new ServletException(ex);
+        } catch (IllegalAccessException ex) {
+            throw new ServletException(ex);
         }
     }
 
