@@ -44,7 +44,7 @@ public class AtividadeDAO {
         }
     }
 
-    public ArrayList<Atividade> buscaSimilar(String filtro) throws SQLException {
+    public ArrayList<Atividade> buscaTitulo(String filtro) throws SQLException {
         try {
             ArrayList<Atividade> lista = new ArrayList<Atividade>() {};
             bd.conectar();
