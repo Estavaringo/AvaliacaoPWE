@@ -20,7 +20,7 @@ public class BancoDados {
     private final String LOCAL = "provapwe";
     
     /*Conexão com o banco de dados na AWS da Amazon*/
-    private final String URL = "jdbc:mysql://" + "dbinstancemysql2.czzc5ptkwvqs.us-west-2.rds.amazonaws.com:3306/" + LOCAL;
+    private final String URL = "jdbc:mysql://" + "dbinstancemysql.czzc5ptkwvqs.us-west-2.rds.amazonaws.com:3306/" + LOCAL;
     private final String LOGIN = "admin";
     private final String SENHA = "password";
     
