@@ -26,7 +26,7 @@ public class BuscaAtividade implements Tarefa {
         ArrayList<Atividade> listaAtividade;
 
         try {
-            listaAtividade = new AtividadeDAO().buscaSimilar(filtro);
+            listaAtividade = new AtividadeDAO().buscaTitulo(filtro);
             req.setAttribute("buscaAtividade", listaAtividade);
         } catch (SQLException ex) {
             Logger.getLogger(BuscaAtividade.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,7 +37,7 @@ public class BuscaAtividade implements Tarefa {
 
     @Override
     public boolean verifica() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
 }
