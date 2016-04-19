@@ -25,11 +25,19 @@ public class VerificaPermissao extends HttpServlet {
         
         
         if(usuario == null){
-            return acesso == false;
+            if(acesso == false){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             if(acesso == false){
                 return true;
-            }else return usuario.isCorretor();
+            }else if(usuario.isCorretor()){
+                return true;                
+            }else{
+                return false;
+            }
         }
     }
 }
