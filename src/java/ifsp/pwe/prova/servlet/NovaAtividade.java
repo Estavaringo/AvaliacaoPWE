@@ -8,6 +8,9 @@ package ifsp.pwe.prova.servlet;
 import ifsp.pwe.prova.beans.Atividade;
 import ifsp.pwe.prova.beans.Usuario;
 import ifsp.pwe.prova.dao.AtividadeDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,7 +36,11 @@ public class NovaAtividade implements Tarefa {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         atividade.setIdUsuario(usuario.getId());
         
-        new AtividadeDAO().adiciona(atividade);
+        try {
+            new AtividadeDAO().adiciona(atividade);
+        } catch (SQLException ex) {
+            Logger.getLogger(NovaAtividade.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         req.setAttribute("novaAtividade", atividade);
 
