@@ -19,7 +19,30 @@ public class UsuarioDAO {
     BancoDados bd = new BancoDados();
     
     public void adiciona(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            bd.conectar();
+            String strSql
+                    = "INSERT INTO ATIVIDADE (USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT, USUA_ENDE, USUA_CORRETOR) VALUES (?,?,?,?,?,?)";
+            PreparedStatement p
+                    = bd.connection.prepareStatement(strSql);
+            p.setString(1, usuario.getTitulo());
+            p.setString(2, usuario.getCorpo());
+            
+            
+            //Verificar tipo do atributo. No banco está como DATETIME.
+            p.setString(3, usuario.getData());
+            
+            
+            p.setInt(4, usuario.getIdUsuario());
+            p.setInt(5, usuario.getIdUsuario());
+            p.setInt(6, usuario.getIdUsuario());
+            p.execute();
+            p.close();
+            bd.desconectar();
+        } catch (SQLException ex) {
+            bd.desconectar();
+            throw ex;
+        }
     }
 
     public Usuario buscaPorEmailESenha(String email, String senha) throws SQLException{
