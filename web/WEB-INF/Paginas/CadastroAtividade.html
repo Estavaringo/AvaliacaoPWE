@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gerenciador de Empresas!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" >
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+   
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 ">
+                <br>
+                <h2>Cadastro de Usuário</h2>
+                <br><br>
+
+
+                <form method="POST" action="Executa">
+                    <div class="form-group">
+                        <label>Nome:</label> 
+                        <input type="text" class="form-control" placeholder="Digite aqui o seu nome" name="nome" value="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email:</label> 
+                        <input type="text" class="form-control" placeholder="Digite aqui o sua email" name="email" value="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha:</label> 
+                        <input type="password" class="form-control" placeholder="Digite aqui a sua senha" name="senha" value="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de Nascimento:</label> 
+                        <input type="text" class="form-control" placeholder="AAAA-MM-DD" name="dataNascimento" value="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha:</label> 
+                        <input type="text" class="form-control" placeholder="Digite aqui o seu endereco" name="endereco" value="" />
+                    </div>
+                    
+                    
+                    <input type="hidden" name="tarefa" value="CadastroUsuario">
+                    <button type="submit" class="btn btn-default" value="Cadastrar">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </body>
+</html>
