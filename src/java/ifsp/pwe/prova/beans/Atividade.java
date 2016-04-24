@@ -5,6 +5,9 @@
  */
 package ifsp.pwe.prova.beans;
 
+import java.sql.Timestamp;
+
+
 /**
  *
  * @author gabri
@@ -13,7 +16,7 @@ public class Atividade {
     private int id;
     private String titulo;
     private String corpo;
-    private String data;
+    private Timestamp date;
     private int idUsuario;
 
     /**
@@ -59,20 +62,6 @@ public class Atividade {
     }
 
     /**
-     * @return the data
-     */
-    public String getData() {
-        return data;
-    }
-
-    /**
-     * @param data the data to set
-     */
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    /**
      * @return the idUsuario
      */
     public int getIdUsuario() {
@@ -84,5 +73,19 @@ public class Atividade {
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    /**
+     * @return the date
+     */
+    public java.sql.Timestamp getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(java.sql.Timestamp date) {
+        this.date = date;
     }
 }

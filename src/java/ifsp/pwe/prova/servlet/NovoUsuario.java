@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gabri
  */
-public class CadastroUsuario implements Tarefa {
+public class NovoUsuario implements Tarefa {
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) {

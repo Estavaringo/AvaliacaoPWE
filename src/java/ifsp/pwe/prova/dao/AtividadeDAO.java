@@ -16,22 +16,21 @@ import java.util.ArrayList;
  * @author gabri
  */
 public class AtividadeDAO {
-
+    java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
     BancoDados bd = new BancoDados();
 
     public void adiciona(Atividade atividade) throws SQLException {
         try {
             bd.conectar();
             String strSql
-                    = "INSERT INTO ATIVIDADE (ATIV_TITU, ATIV_CORPO, ATIV_DT, USUARIO__USUA_ID) VALUES (?,?,?,?)";
+                    = "INSERT INTO ATIVIDADE (ATIV_TITU, ATIV_CORPO, ATIV_DT, USUARIO_USUA_ID) VALUES (?,?,?,?)";
             PreparedStatement p
                     = bd.connection.prepareStatement(strSql);
             p.setString(1, atividade.getTitulo());
             p.setString(2, atividade.getCorpo());
             
             
-            //Verificar tipo do atributo. No banco está como DATETIME.
-            p.setString(3, atividade.getData());
+            p.setTimestamp(3, date);
             
             
             p.setInt(4, atividade.getIdUsuario());
@@ -48,7 +47,7 @@ public class AtividadeDAO {
         try {
             ArrayList<Atividade> lista = new ArrayList<Atividade>() {};
             bd.conectar();
-            String strSQL = "SELECT ATIV_ID, ATIV_TITU, ATIV_CORPO, ATIV_DT, USUARIO__USUA_ID FROM ATIVIDADE WHERE ATIV_TITU LIKE ? ";
+            String strSQL = "SELECT ATIV_ID, ATIV_TITU, ATIV_CORPO, ATIV_DT, USUARIO_USUA_ID FROM ATIVIDADE WHERE ATIV_TITU LIKE ? ";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setString(1, "%" + filtro + "%");
             ResultSet rs = p.executeQuery();
@@ -59,7 +58,7 @@ public class AtividadeDAO {
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
               
                 //Verificar tipo do atributo. No banco está como DATETIME.
-                obj.setData(rs.getString("ATIV_DT"));
+                obj.setDate(rs.getTimestamp("ATIV_DT"));
                 
                 obj.setIdUsuario(rs.getInt("USUARIO__USUA_ID"));
                 lista.add(obj);

@@ -29,7 +29,6 @@ public class NovaAtividade implements Tarefa {
         //grava as informações da atividade no objeto
         atividade.setTitulo(req.getParameter("titulo"));
         atividade.setCorpo(req.getParameter("corpo"));
-        atividade.setData(req.getParameter("data"));
         
         //armazena o id do usuario para aquela atividade
         HttpSession session = req.getSession();
@@ -39,7 +38,8 @@ public class NovaAtividade implements Tarefa {
         try {
             new AtividadeDAO().adiciona(atividade);
         } catch (SQLException ex) {
-            Logger.getLogger(NovaAtividade.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Erro ao consultar usuário no banco de dados. Detalhes: " + ex.getMessage());
+            return "Erro.html";
         }
 
         req.setAttribute("novaAtividade", atividade);
