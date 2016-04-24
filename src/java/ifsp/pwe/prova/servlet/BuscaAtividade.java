@@ -26,7 +26,7 @@ public class BuscaAtividade implements Tarefa {
         ArrayList<Atividade> listaAtividade;
 
         try {
-            listaAtividade = new AtividadeDAO().buscaTitulo(filtro);
+            listaAtividade = new AtividadeDAO().buscaPorTitulo(filtro);
             req.setAttribute("buscaAtividade", listaAtividade);
         } catch (SQLException ex) {
             Logger.getLogger(BuscaAtividade.class.getName()).log(Level.SEVERE, null, ex);
