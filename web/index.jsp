@@ -39,7 +39,7 @@
                             <button type="submit" class="btn btn-default" value="Cadastrar empresa">Cadastrar Empresa</button>
                             <input type="hidden" name="tarefa" value="NovaEmpresa">
                         </div></form>
-                    <button type="button" onclick="window.location.href = 'http://localhost:8084/AvaliacaoPWE/NovaAtividade.html'" class="btn btn-default">Nova Atividade</a></button>
+                    <button type="button" onclick="window.location.href = 'http://localhost:8084/AvaliacaoPWE/CadastroAtividade.html'" class="btn btn-default">Nova Atividade</a></button>
                 </c:if>
 
                 <c:if test="${empty usuarioLogado}">  
