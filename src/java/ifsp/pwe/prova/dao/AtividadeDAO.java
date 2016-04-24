@@ -6,6 +6,7 @@
 package ifsp.pwe.prova.dao;
 
 import ifsp.pwe.prova.beans.Atividade;
+import ifsp.pwe.prova.beans.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +24,16 @@ public class AtividadeDAO {
         try {
             bd.conectar();
             String strSql
-                    = "INSERT INTO ATIVIDADE (ATIV_TITU, ATIV_CORPO, ATIV_DT, USUARIO__USUA_ID) VALUES (?,?,?,?)";
+                    = "INSERT INTO ATIVIDADE ("
+                    + " ATIV_TITU, "
+                    + " ATIV_CORPO, "
+                    + " ATIV_DT, "
+                    + " USUARIO_USUA_ID) "
+                    + "VALUES ("
+                    + " ?,"
+                    + " ?,"
+                    + " ?,"
+                    + " ?)";
             PreparedStatement p
                     = bd.connection.prepareStatement(strSql);
             p.setString(1, atividade.getTitulo());
@@ -43,12 +53,20 @@ public class AtividadeDAO {
             throw ex;
         }
     }
-
-    public ArrayList<Atividade> buscaTitulo(String filtro) throws SQLException {
+    //Método que localiza todas as atividades que possuem um Titulo
+    public ArrayList<Atividade> buscaPorTitulo(String filtro) throws SQLException {
         try {
             ArrayList<Atividade> lista = new ArrayList<Atividade>() {};
             bd.conectar();
-            String strSQL = "SELECT ATIV_ID, ATIV_TITU, ATIV_CORPO, ATIV_DT, USUARIO__USUA_ID FROM ATIVIDADE WHERE ATIV_TITU LIKE ? ";
+            String strSQL = ""
+                    + "SELECT "
+                    + " ATIV_ID, "
+                    + " ATIV_TITU, "
+                    + " ATIV_CORPO, "
+                    + " ATIV_DT, "
+                    + " USUARIO_USUA_ID "
+                    + "FROM ATIVIDADE "
+                    + "WHERE ATIV_TITU LIKE ? ";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setString(1, "%" + filtro + "%");
             ResultSet rs = p.executeQuery();
@@ -61,7 +79,48 @@ public class AtividadeDAO {
                 //Verificar tipo do atributo. No banco está como DATETIME.
                 obj.setData(rs.getString("ATIV_DT"));
                 
-                obj.setIdUsuario(rs.getInt("USUARIO__USUA_ID"));
+                obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
+                lista.add(obj);
+            }
+            p.close();
+            bd.desconectar();
+            return lista;
+        } catch (SQLException ex) {
+            bd.desconectar();
+            throw ex;
+        }
+
+    }
+    
+    public ArrayList<Atividade> buscaPorUsuario(Usuario usuario) throws SQLException {
+        try {
+            ArrayList<Atividade> lista = new ArrayList<Atividade>() {};
+            bd.conectar();
+            String strSQL = ""
+                    + "SELECT "
+                    + "ATIV_ID, "
+                    + "ATIV_TITU, "
+                    + "ATIV_CORPO, "
+                    + "ATIV_DT, "
+                    + "USUARIO_USUA_ID "
+                    + "FROM ATIVIDADE A "
+                    + "LEFT JOIN USUARIO B "
+                    + "ON A.USUARIO_USUA_ID = B.USUA_ID "
+                    + "WHERE B.USUA_ID = ? "
+                    + " AND B.USUA_CORRETOR = ?";
+            PreparedStatement p = bd.connection.prepareStatement(strSQL);
+            p.setInt(1, usuario.getId());
+            ResultSet rs = p.executeQuery();
+            while (rs.next()) {
+                Atividade obj = new Atividade();
+                obj.setId(rs.getInt("ATIV_ID"));
+                obj.setTitulo(rs.getString("ATIV_TITU"));
+                obj.setCorpo(rs.getString("ATIV_CORPO"));
+              
+                //Verificar tipo do atributo. No banco está como DATETIME.
+                obj.setData(rs.getString("ATIV_DT"));
+                
+                obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
                 lista.add(obj);
             }
             p.close();
