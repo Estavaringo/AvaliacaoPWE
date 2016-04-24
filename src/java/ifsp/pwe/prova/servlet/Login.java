@@ -25,11 +25,13 @@ public class Login implements Tarefa {
         try {
             String email = req.getParameter("email");
             String senha = req.getParameter("senha");
-            
-            usuario = new UsuarioDAO().buscaPorEmailESenha(email, senha);
-            
+
+            usuario = new UsuarioDAO().buscaPorEmail(email);
+
             if (usuario == null) {
-                return "Invalido.html";
+                return "UsuarioInvalido.html";
+            } else if (!usuario.getSenha().equals(senha)) {
+                return "SenhaInvalida.html";
             } else {
                 HttpSession session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);

@@ -17,16 +17,26 @@ import java.sql.SQLException;
  */
 public class CorrecaoDAO {
 
-    public void adiciona(Correcao correcao) {
-    
-    }
-    
     BancoDados bd = new BancoDados();
     
-    public void insereCorrecao(){
-        
-        
-        
+    public void adiciona(Correcao correcao) throws SQLException{
+        try {
+            bd.conectar();
+            String strSql
+                    = "INSERT INTO CORRECAO (CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID) VALUES (?,?,?,?)";
+            PreparedStatement p
+                    = bd.connection.prepareStatement(strSql);
+            p.setInt(1, correcao.getId());
+            p.setString(2, correcao.getComentario());
+            p.setInt(3, correcao.getIdAtividade());
+            p.setInt(4, correcao.getIdUsuario());
+            p.execute();
+            p.close();
+            bd.desconectar();
+        } catch (SQLException ex) {
+            bd.desconectar();
+            throw ex;
+        }
     }
     
     

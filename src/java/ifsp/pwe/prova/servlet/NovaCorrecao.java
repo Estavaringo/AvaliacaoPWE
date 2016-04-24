@@ -8,6 +8,9 @@ package ifsp.pwe.prova.servlet;
 import ifsp.pwe.prova.beans.Correcao;
 import ifsp.pwe.prova.beans.Usuario;
 import ifsp.pwe.prova.dao.CorrecaoDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,7 +36,11 @@ public class NovaCorrecao implements Tarefa{
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         correcao.setIdUsuario(usuario.getId());
         
-        new CorrecaoDAO().adiciona(correcao);
+        try {
+            new CorrecaoDAO().adiciona(correcao);
+        } catch (SQLException ex) {
+            Logger.getLogger(NovaCorrecao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         req.setAttribute("novaCorrecao", correcao);
 

@@ -7,6 +7,7 @@ package ifsp.pwe.prova.servlet;
 
 import ifsp.pwe.prova.beans.Usuario;
 import ifsp.pwe.prova.dao.UsuarioDAO;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,13 +24,18 @@ public class CadastroUsuario implements Tarefa {
         usuario.setEmail(req.getParameter("email"));
         usuario.setSenha(req.getParameter("senha"));
         usuario.setEndereco(req.getParameter("endereco"));
-        usuario.setDataNascimento(req.getParameter("data"));
+        usuario.setDataNascimento(req.getParameter("dataNascimento"));
 
-        new UsuarioDAO().adiciona(usuario);
+        try {
+            new UsuarioDAO().adiciona(usuario);
+        } catch (SQLException ex) {
+            System.err.println("Erro ao consultar usuário no banco de dados. Detalhes: " + ex.getMessage());
+            return "Erro.html";
+        }
 
         req.setAttribute("novoUsuario", usuario);
 
-        return "/WEB-INF/Paginas/Cadastro.jsp";
+        return "/WEB-INF/Paginas/NovoCadastro.jsp";
     }
 
     @Override
