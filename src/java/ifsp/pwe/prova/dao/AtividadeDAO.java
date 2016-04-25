@@ -102,13 +102,13 @@ public class AtividadeDAO {
                     //Se o usuario for corretor, atribui todas as correções.
                     if (usuario.isCorretor()) {
                         //Através de CorrecaoDAO, localiza os dados da Correcao
-                        obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(rs.getInt("ATIV_ID")));
+                        obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
                     } else {
                         /*Se o usuario não for corretor, atribui a Correcao, para as atividades 
                         que foram submetidas por ele*/
                         if (usuario.getId() == obj.getIdUsuario()) {
                             //Através de CorrecaoDAO, localiza os dados da Correcao
-                            obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(rs.getInt("ATIV_ID")));
+                            obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
                         }
                     }
                 }
@@ -176,7 +176,7 @@ public class AtividadeDAO {
                         que foram submetidas por ele*/
                         if (usuario.getId() == obj.getIdUsuario()) {
                             //Através de CorrecaoDAO, localiza os dados da Correcao
-                            obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(rs.getInt("ATIV_ID")));
+                            obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
                         }
                     }
                 }
