@@ -20,16 +20,21 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4 ">
                 <br>
-                <table class="table">
+                <table class="table-striped">
                     <tr>
                         <td>Título da Atividade</td>
+                        <td>Descrição da Atividade</td>
+                        <td>Data de Publicação</td>
                         <td>Nome do Aluno</td>
                     </tr>
-                    <c:forEach var="atividade" items="${buscaAtividade}">
-                        <tr><td> ${atividade.titulo}</td>
-                            <td> ${atividade.idUsuario} </td>
-                        </tr>
-                    </c:forEach>
+                    <c:if test="${not empty listaDeAtividades}">
+                        <c:forEach var="atividade" items="${listaDeAtividades}">
+                            <tr>
+                                <td> ${atividade.titulo}</td>
+                                <td> ${atividade.idUsuario} </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
                 </table>
 
                 </table>
