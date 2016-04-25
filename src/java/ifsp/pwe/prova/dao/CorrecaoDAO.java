@@ -17,6 +17,7 @@ import java.sql.SQLException;
 public class CorrecaoDAO {
 
     BancoDados bd = new BancoDados();
+    ArrayList<Correcao> listaCorrecao;
 
     public void adiciona(Correcao correcao) throws SQLException {
         try {
@@ -65,15 +66,18 @@ public class CorrecaoDAO {
         }
     }
 
-    public Correcao buscaPorIDAtividade(int id) throws SQLException {
+    public ArrayList<Correcao> buscaPorIDAtividade(int id) throws SQLException {
         try {
             Correcao obj = null;
+            listaCorrecao =  = new ArrayList<Correcao>() {
+            };
             bd.conectar();
             String strSQL = "SELECT CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID FROM CORRECAO WHERE ATIVIDADE_ATIV_ID = ?;";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setInt(1, id);
             ResultSet rs = p.executeQuery();
-            if (rs.next()) {
+            
+            while (rs.next()) {
                 obj = new Correcao();
                 obj.setId(rs.getInt("CORR_ID"));
                 obj.setComentario(rs.getString("CORR_COMENTARIO"));
@@ -81,11 +85,11 @@ public class CorrecaoDAO {
                 obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
                 p.close();
                 bd.desconectar();
-                return obj;
+                listaCorrecao.add(obj);
             }
             p.close();
             bd.desconectar();
-            return obj;
+            return listaCorrecao;
         } catch (SQLException ex) {
             bd.desconectar();
             throw ex;
