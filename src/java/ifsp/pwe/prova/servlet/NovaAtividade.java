@@ -20,38 +20,44 @@ import javax.servlet.http.HttpSession;
  */
 public class NovaAtividade implements Tarefa {
 
+    //Declarações
+    private ArrayList<Atividade> listaAtividade = null;
+    private Atividade atividade = null;
+    private Usuario usuario = null;
+
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) {
-        
-        ArrayList<Atividade> listaAtividade;
-
-        //instancia uma nova atividade
-        Atividade atividade = new Atividade();
-
-        //grava as informações da atividade no objeto
-        atividade.setTitulo(req.getParameter("titulo"));
-        atividade.setCorpo(req.getParameter("corpo"));
-
-        //armazena o id do usuario para aquela atividade
-        HttpSession session = req.getSession();
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        atividade.setIdUsuario(usuario.getId());
 
         try {
-            //Adiciona um nova atividade no banco de dados
+
+            //instancia uma nova atividade
+            atividade = new Atividade();
+            
+            //Localiza o usuario que está logado
+            HttpSession session = req.getSession();
+            usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+            //Atribui as informações da atividade no objeto
+            atividade.setTitulo(req.getParameter("titulo"));
+            atividade.setCorpo(req.getParameter("corpo"));
+            atividade.setUsuario(usuario);            
+
+            //Grava um nova atividade no banco de dados
             new AtividadeDAO().adiciona(atividade);
             
+            //Atribui a ultima atividade como Atributo a ser enviado na próxima Requisição 
+            req.setAttribute("novaAtividade", atividade);
+
             //Busca todas as atividades que estão vinculadas a este usuário
-            listaAtividade = new AtividadeDAO().buscaPorUsuario(usuario);
+            listaAtividade = new AtividadeDAO().buscaAtividades(usuario);
+
+            //Atribui a lista de atividades preenchida como Atributo a ser enviado na próxima Requisição 
             req.setAttribute("listaDeAtividades", listaAtividade);
-            
-            
+
         } catch (SQLException ex) {
             System.err.println("Erro ao inserir atividade no banco de dados. Detalhes: " + ex.getMessage());
             return "Erro.html";
         }
-
-        req.setAttribute("novaAtividade", atividade);
 
         return "/WEB-INF/Paginas/Atividades.jsp";
     }

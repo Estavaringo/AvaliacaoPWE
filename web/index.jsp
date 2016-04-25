@@ -23,9 +23,9 @@
 
 
         <div class="row">
-            <div class="col-md-4 col-md-offset-4 ">
+            <div class="col-md-5 col-md-offset-2 ">
                 <br>
-                <h2>Bem vindo ao sistema gerenciador de empresas!</h2>
+                <h1>Gerenciador de Atividades</h1>
                 <br><br>
                 <c:if test="${not empty usuarioLogado}">
 
@@ -63,7 +63,7 @@
                 <form action="Executa" method="GET">
                     <div class="form-group">
                         <label>Buscar atividade:</label> 
-                        <input type="text" class="form-control" placeholder="Digite aqui o titulo da atividade" name="filtro">
+                        <input type="text" class="form-control" placeholder="Digite aqui o titulo da atividade" name="filtroDeTitulo">
                         <br>
                         <button type="submit" class="btn btn-default" value="Buscar Atividade">Buscar Atividade</button>
                         <input type="hidden" name="tarefa" value="BuscaAtividade">

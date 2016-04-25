@@ -69,7 +69,7 @@ public class CorrecaoDAO {
         try {
             Correcao obj = null;
             bd.conectar();
-            String strSQL = "SELECT CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID FROM CORRECAO WHERE ATIVIDADE_ATIV_ID = id;";
+            String strSQL = "SELECT CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID FROM CORRECAO WHERE ATIVIDADE_ATIV_ID = ?;";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setInt(1, id);
             ResultSet rs = p.executeQuery();

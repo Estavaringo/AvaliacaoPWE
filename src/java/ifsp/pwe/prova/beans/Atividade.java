@@ -10,15 +10,16 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author gabri
+ * @author Gabriel e Flávio
  */
+
 public class Atividade {
     private int id;
     private String titulo;
     private String corpo;
-    private Timestamp date;
-    private int idUsuario;
-    private String nomeUsuario;
+    private Timestamp dataDeAdicao;
+    private Usuario usuario = null;
+    private Correcao correcao = null;
 
     /**
      * @return the id
@@ -63,38 +64,47 @@ public class Atividade {
     }
 
     /**
-     * @return the idUsuario
+     * @return the dataDeAdicao
      */
-    public int getIdUsuario() {
-        return idUsuario;
+    public java.sql.Timestamp getDataDeAdicao() {
+        return dataDeAdicao;
     }
 
     /**
-     * @param idUsuario the idUsuario to set
+     * @param dataDeAdicao the dataDeAdicao to set
      */
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    /**
-     * @return the date
-     */
-    public java.sql.Timestamp getDate() {
-        return date;
-    }
-
-    /**
-     * @param date the date to set
-     */
-    public void setDate(java.sql.Timestamp date) {
-        this.date = date;
+    public void setDataDeAdicao(java.sql.Timestamp dataDeAdicao) {
+        this.dataDeAdicao = dataDeAdicao;
     }
     
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    /**
+     * @return the Usuario.Id
+     */
+    public int getIdUsuario() {
+        return usuario.getId();
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    /**
+     * @param idUsuario the to set Usuario.Id
+     */
+    public void setIdUsuario(int idUsuario) {
+        this.usuario.setId(idUsuario);
     }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Correcao getCorrecao() {
+        return correcao;
+    }
+
+    public void setCorrecao(Correcao correcao) {
+        this.correcao = correcao;
+    }    
+    
 }
