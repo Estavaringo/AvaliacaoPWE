@@ -18,6 +18,7 @@ public class Atividade {
     private String corpo;
     private Timestamp date;
     private int idUsuario;
+    private String nomeUsuario;
 
     /**
      * @return the id
@@ -87,5 +88,13 @@ public class Atividade {
      */
     public void setDate(java.sql.Timestamp date) {
         this.date = date;
+    }
+    
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 }
