@@ -15,20 +15,14 @@ import java.sql.SQLException;
  */
 public class BancoDados {
 
-    //public Connection connection = null;
-    //private final String DRIVER = "com.mysql.jdbc.Driver";
-    // private final String LOCAL = "provapwe";
-    /*Conexão com o banco de dados na AWS da Amazon*/
-    //private final String URL = "jdbc:mysql://" + "dbinstancemysql.czzc5ptkwvqs.us-west-2.rds.amazonaws.com:3306/" + LOCAL;
-    // private final String LOGIN = "admin";
-    // private final String SENHA = "password";
-    
-    
     public Connection connection = null;
+    
     private final String DRIVER = "com.mysql.jdbc.Driver";
-    private final String URL = "jdbc:mysql://localhost/dbprovapwe";
-    private final String LOGIN = "root";
-    private final String SENHA = "Admin123";
+     private final String LOCAL = "AvaliacaoPWE";
+    /*Conexão com o banco de dados na AWS da Amazon*/
+    private final String URL = "jdbc:mysql://" + "dbavaliacaopwe.czzc5ptkwvqs.us-west-2.rds.amazonaws.com:3306/" + LOCAL;
+     private final String LOGIN = "admin";
+     private final String SENHA = "password";
 
     public void conectar() {
         try {
