@@ -9,6 +9,7 @@ import ifsp.pwe.prova.beans.Atividade;
 import ifsp.pwe.prova.beans.Usuario;
 import ifsp.pwe.prova.dao.AtividadeDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,9 @@ public class NovaAtividade implements Tarefa {
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) {
+        
+        ArrayList<Atividade> listaAtividade;
+
         //instancia uma nova atividade
         Atividade atividade = new Atividade();
 
@@ -34,7 +38,14 @@ public class NovaAtividade implements Tarefa {
         atividade.setIdUsuario(usuario.getId());
 
         try {
+            //Adiciona um nova atividade no banco de dados
             new AtividadeDAO().adiciona(atividade);
+            
+            //Busca todas as atividades que estão vinculadas a este usuário
+            listaAtividade = new AtividadeDAO().buscaPorUsuario(usuario);
+            req.setAttribute("listaDeAtividades", listaAtividade);
+            
+            
         } catch (SQLException ex) {
             System.err.println("Erro ao inserir atividade no banco de dados. Detalhes: " + ex.getMessage());
             return "Erro.html";
