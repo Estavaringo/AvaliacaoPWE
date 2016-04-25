@@ -29,7 +29,7 @@ public class NovoUsuario implements Tarefa {
         try {
             new UsuarioDAO().adiciona(usuario);
         } catch (SQLException ex) {
-            System.err.println("Erro ao consultar usuário no banco de dados. Detalhes: " + ex.getMessage());
+            System.err.println("Erro ao inserir usuário no banco de dados. Detalhes: " + ex.getMessage());
             return "Erro.html";
         }
 

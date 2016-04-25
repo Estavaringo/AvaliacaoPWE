@@ -26,7 +26,7 @@ public class UsuarioDAO {
                 i = 1;
             }
             String strSql
-                    = "INSERT INTO USUARIO (USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT_NASC, USUA_ENDE, USUA_CORRETOR) VALUES (?,?,?,?,?,?)";
+                    = "INSERT INTO USUARIO (USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT, USUA_ENDE, USUA_CORRETOR) VALUES (?,?,?,?,?,?)";
             PreparedStatement p
                     = bd.connection.prepareStatement(strSql);
             p.setString(1, usuario.getNome());
@@ -53,7 +53,7 @@ public class UsuarioDAO {
         try {
             Usuario obj = null;
             bd.conectar();
-            String strSQL = "SELECT USUA_ID, USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT_NASC, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_EMAIL = ?";
+            String strSQL = "SELECT USUA_ID, USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_EMAIL = ?";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setString(1, email);
             ResultSet rs = p.executeQuery();
@@ -63,7 +63,7 @@ public class UsuarioDAO {
                 obj.setNome(rs.getString("USUA_NM"));
                 obj.setSenha(rs.getString("USUA_SENHA"));
                 obj.setEmail(rs.getString("USUA_EMAIL"));
-                obj.setDataNascimento(rs.getString("USUA_DT_NASC"));
+                obj.setDataNascimento(rs.getString("USUA_DT"));
                 obj.setEndereco(rs.getString("USUA_ENDE"));
                 if(rs.getInt("USUA_CORRETOR") == 1){
                     obj.setCorretor(true);
@@ -88,7 +88,7 @@ public Usuario buscaPorID(int id) throws SQLException{
         try {
             Usuario obj = null;
             bd.conectar();
-            String strSQL = "SELECT USUA_ID, USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT_NASC, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_ID = ?";
+            String strSQL = "SELECT USUA_ID, USUA_NM, USUA_EMAIL, USUA_SENHA, USUA_DT, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_ID = ?";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setInt(1, id);
             ResultSet rs = p.executeQuery();
@@ -98,7 +98,7 @@ public Usuario buscaPorID(int id) throws SQLException{
                 obj.setNome(rs.getString("USUA_NM"));
                 obj.setSenha(rs.getString("USUA_SENHA"));
                 obj.setEmail(rs.getString("USUA_EMAIL"));
-                obj.setDataNascimento(rs.getString("USUA_DT_NASC"));
+                obj.setDataNascimento(rs.getString("USUA_DT"));
                 obj.setEndereco(rs.getString("USUA_ENDE"));
                 if(rs.getInt("USUA_CORRETOR") == 1){
                     obj.setCorretor(true);
