@@ -67,6 +67,13 @@
                         <br>
                         <button type="submit" class="btn btn-default" value="Buscar Atividade">Buscar Atividade</button>
                         <input type="hidden" name="tarefa" value="BuscaAtividade">
+                        <input type="hidden" name="busca" value="buscaPorTitulo">
+                        </form>
+
+                        <br>
+                        <button type="submit" class="btn btn-default" value="Visualizar Atividades">Visualizar Atividade</button>
+                        <input type="hidden" name="tarefa" value="BuscaAtividade">
+                        <input type="hidden" name="busca" value="buscaPorUsuario">
                         </form>
 
                         <c:if test="${not empty usuarioLogado}">
