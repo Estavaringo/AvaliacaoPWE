@@ -12,32 +12,37 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="js/bootstrap.min.js"></script>
     </head>
-   
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 ">
-                <br>
-                <h2>Cadastro de Usuário</h2>
-                <br><br>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 ">
+            <br>
+            <h2>Cadastro de Usuário</h2>
+            <br><br>
 
 
-                <form method="POST" action="Executa">
-                    <div class="form-group">
-                        <label>Titulo:</label> 
-                        <input type="text" class="form-control" placeholder="Digite aqui o titulo da atividade" name="titulo" value="" />
-                    </div>
+            <form method="POST" action="Executa">
+                <div class="form-group">
+                    <label>Titulo:</label> 
+                    <input type="text" class="form-control" placeholder="Digite aqui o titulo da atividade" name="titulo" value="" />
+                </div>
 
-                    <div class="form-group">
-                        <label>Corpo:</label> 
-                        <input type="text" class="form-control" placeholder="Digite aqui o corpo da atividade" name="corpo" value="" />
-                    </div>
-                    
-             
-                    <input type="hidden" name="tarefa" value="NovaAtividade">
-                    <button type="submit" class="btn btn-default" value="Incluir">Incluir Atividade</button>
-                </form>
-            </div>
+                <div class="form-group">
+                    <label>Corpo:</label> 
+                    <input type="text" class="form-control" placeholder="Digite aqui o corpo da atividade" name="corpo" value="" />
+                </div>
+
+
+                <input type="hidden" name="tarefa" value="NovaAtividade">
+                <button type="submit" class="btn btn-default" value="Incluir">Incluir Atividade</button>
+            </form>
+
+
+            <br><br>
+            <button type="button" onclick="window.location.href = 'http://localhost:8084/AvaliacaoPWE/'" class="btn btn-default">Voltar</a></button>
+
         </div>
+    </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</body>
 </html>

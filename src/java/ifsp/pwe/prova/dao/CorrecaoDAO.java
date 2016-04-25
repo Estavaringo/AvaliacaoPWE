@@ -9,6 +9,7 @@ import ifsp.pwe.prova.beans.Correcao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,6 +37,8 @@ public class CorrecaoDAO {
         } catch (SQLException ex) {
             bd.desconectar();
             throw ex;
+        }finally{
+            bd.desconectar();
         }
     }
 
@@ -69,8 +72,7 @@ public class CorrecaoDAO {
     public ArrayList<Correcao> buscaPorIDAtividade(int id) throws SQLException {
         try {
             Correcao obj = null;
-            listaCorrecao =  = new ArrayList<Correcao>() {
-            };
+            listaCorrecao = new ArrayList<Correcao>();
             bd.conectar();
             String strSQL = "SELECT CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID FROM CORRECAO WHERE ATIVIDADE_ATIV_ID = ?;";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
@@ -89,6 +91,7 @@ public class CorrecaoDAO {
             }
             p.close();
             bd.desconectar();
+            rs.close();
             return listaCorrecao;
         } catch (SQLException ex) {
             bd.desconectar();

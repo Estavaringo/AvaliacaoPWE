@@ -33,8 +33,8 @@
                             <button type="submit" class="btn btn-default" value="Cadastrar Atividade">Cadastrar Atividade</button>
                             <input type="hidden" name="tarefa" value="CadastrarAtividade">
                         </div></form>
-                </c:if>
-                    
+                    </c:if>
+
                 <!-- Modal para Avisar que a atividade foi cadastrada com sucesso-->
                 <c:if test="${not empty novaAtividade}">
                     <div class="modal hide fade" id="modalNovaAtividade">
@@ -74,9 +74,23 @@
                                     <td> ${atividade.corpo} </td>
                                     <td> ${atividade.dataDeAdicao} </td>
                                     <td> ${atividade.usuario.nome}</td>
-                                    <td></td>
-                                </tr>
-                            </c:forEach>
+                                    <td> 
+                                        <c:forEach var="correcao" items="${atividade.correcao}">
+                                            <form method="GET" action="Executa">
+                                                <button type="submit" class="btn btn-link" value="Incluir Correcao">${correcao.id}</button>
+                                                <input type="hidden" name="tarefa" value="VisualizarCorrecao">
+                                                <input type="hidden" name="correcao" value=${correcao.id}>
+                                            </form>
+
+                                            </c:forEach></td>
+                                        <td> <form method="POST" action="Executa">
+                                                <button type="submit" class="btn btn-default" value="Incluir Correcao">Incluir Correcao</button>
+                                                <input type="hidden" name="tarefa" value="CadastroCorrecao">
+                                                <input type="hidden" name="atividade" value=${atividade.id}>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                         </c:if>
                     </tbody>
                 </table>
@@ -90,9 +104,9 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script type="text/javascript">
-            $(window).load(function () {
-                $('#modalNovaAtividade').modal('show');
-            });
+                    $(window).load(function () {
+                        $('#modalNovaAtividade').modal('show');
+                    });
         </script>
 
     </body>

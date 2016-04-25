@@ -24,9 +24,12 @@ public class Controller extends HttpServlet {
 
         if (tarefa == null) {
             throw new IllegalArgumentException("Você esqueceu de passar a tarefa!");
-            
+
         } else if (tarefa.equals("CadastrarAtividade")) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/Paginas/CadastroAtividade.html");
+            requestDispatcher.forward(req, resp);
+        } else if (tarefa.equals("CadastroCorrecao")) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/Paginas/CadastroCorrecao.html");
             requestDispatcher.forward(req, resp);
         } else {
 

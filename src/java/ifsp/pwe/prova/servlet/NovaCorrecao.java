@@ -28,7 +28,7 @@ public class NovaCorrecao implements Tarefa{
         Correcao correcao = new Correcao();
         
         //grava as informações da atividade no objeto
-        correcao.setComentario(req.getParameter("titulo"));
+        correcao.setComentario(req.getParameter("comentario"));
         correcao.setIdAtividade(Integer.parseInt(req.getParameter("atividade")));
         
         //armazena o id do usuario para aquela atividade

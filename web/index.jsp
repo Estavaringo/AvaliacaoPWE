@@ -36,7 +36,7 @@
                             <button type="submit" class="btn btn-default" value="Cadastrar Atividade">Cadastrar Atividade</button>
                             <input type="hidden" name="tarefa" value="CadastrarAtividade">
                         </div></form>
-                </c:if>
+                    </c:if>
 
                 <c:if test="${empty usuarioLogado}">  
 
@@ -70,17 +70,13 @@
                         <input type="hidden" name="busca" value="buscaPorTitulo">
                         </form>
 
-                        <br>
-                        <button type="submit" class="btn btn-default" value="Visualizar Atividades">Visualizar Atividade</button>
-                        <input type="hidden" name="tarefa" value="BuscaAtividade">
-                        <input type="hidden" name="busca" value="buscaPorUsuario">
-                        </form>
+
 
                         <c:if test="${not empty usuarioLogado}">
                             <br><br>
                             <form action="Executa" method="POST">
                                 <button type="submit" class="btn btn-default" value="Deslogar">Deslogar</button>
-                                <input type="hidden" name="tarefa" value="Logout">
+                                <input type="hidden" name="tarefa" value="Logout"><br><br>
                             </form>
                         </c:if>
                     </div>

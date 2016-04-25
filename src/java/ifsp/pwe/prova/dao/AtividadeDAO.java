@@ -6,6 +6,7 @@
 package ifsp.pwe.prova.dao;
 
 import ifsp.pwe.prova.beans.Atividade;
+import ifsp.pwe.prova.beans.Correcao;
 import ifsp.pwe.prova.beans.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ public class AtividadeDAO {
 
     java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
     BancoDados bd = new BancoDados();
-    
+
     //Declaração das DAOs de Usuario e Objeto
     UsuarioDAO usuarioDAO;
     CorrecaoDAO correcaoDAO;
@@ -53,16 +54,20 @@ public class AtividadeDAO {
         } catch (SQLException ex) {
             bd.desconectar();
             throw ex;
+        } finally {
+            correcaoDAO = null;
+            usuarioDAO = null;
+            bd.desconectar();
         }
     }
 
     //Método que localiza todas as atividades pelo Titulo, implementando as regras de perfil de acesso
     public ArrayList<Atividade> buscaAtividadesPorTitulo(Usuario usuario, String titulo) throws SQLException {
-        
+
         //Instância as DAO de Usuario e Correcao
         usuarioDAO = new UsuarioDAO();
         correcaoDAO = new CorrecaoDAO();
-        
+
         try {
             ArrayList<Atividade> lista = new ArrayList<Atividade>() {
             };
@@ -76,25 +81,25 @@ public class AtividadeDAO {
                     + " A.USUARIO_USUA_ID "
                     + "FROM ATIVIDADE A "
                     + "WHERE A.ATIV_TITU LIKE ? ";
-            
+
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setString(1, "%" + titulo + "%");
             ResultSet rs = p.executeQuery();
-            
+
             while (rs.next()) {
-                
+
                 //Instância Atividade
                 Atividade obj = new Atividade();
-                
+
                 //Atribui os dados de Atividade
                 obj.setId(rs.getInt("ATIV_ID"));
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
                 obj.setDataDeAdicao(rs.getTimestamp("ATIV_DT"));
-                
+
                 //Através de UsuarioDAO, localiza os dados do Usuário
                 obj.setUsuario(usuarioDAO.buscaPorID(rs.getInt("USUARIO_USUA_ID")));
-                
+
                 /*Se o Usuario estiver vazio, entende que ele está deslogado. Desta forma, 
                 não será atribuido os dados das Correções*/
                 if (usuario != null) {
@@ -103,37 +108,38 @@ public class AtividadeDAO {
                     if (usuario.isCorretor()) {
                         //Através de CorrecaoDAO, localiza os dados da Correcao
                         obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
-                    } else {
-                        /*Se o usuario não for corretor, atribui a Correcao, para as atividades 
-                        que foram submetidas por ele*/
-                        if (usuario.getId() == obj.getIdUsuario()) {
-                            //Através de CorrecaoDAO, localiza os dados da Correcao
-                            obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
-                        }
+                        ArrayList<Correcao> listaTeste = obj.getCorrecao();
+                        System.out.println(listaTeste.size());
+                    } else /*Se o usuario não for corretor, atribui a Correcao, para as atividades 
+                        que foram submetidas por ele*/ if (usuario.getId() == obj.getIdUsuario()) {
+                        //Através de CorrecaoDAO, localiza os dados da Correcao
+                        obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
                     }
                 }
-                
+
                 //Adiciona o objeto Atividade a lista de Atividades
                 lista.add(obj);
             }
             p.close();
+            rs.close();
             bd.desconectar();
             return lista;
         } catch (SQLException ex) {
             bd.desconectar();
             throw ex;
-        }finally{
+        } finally {
             correcaoDAO = null;
             usuarioDAO = null;
+            bd.desconectar();
         }
     }
 
     public ArrayList<Atividade> buscaAtividades(Usuario usuario) throws SQLException {
-        
+
         //Instância as DAO de Usuario e Correcao
         usuarioDAO = new UsuarioDAO();
         correcaoDAO = new CorrecaoDAO();
-        
+
         try {
             ArrayList<Atividade> lista = new ArrayList<Atividade>() {
             };
@@ -148,21 +154,21 @@ public class AtividadeDAO {
                     + "FROM ATIVIDADE A ";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             ResultSet rs = p.executeQuery();
-            
+
             while (rs.next()) {
-                
+
                 //Instância Atividade
                 Atividade obj = new Atividade();
-                
+
                 //Atribui os dados de Atividade
                 obj.setId(rs.getInt("ATIV_ID"));
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
                 obj.setDataDeAdicao(rs.getTimestamp("ATIV_DT"));
-                
+
                 //Através de UsuarioDAO, localiza os dados do Usuário
                 obj.setUsuario(usuarioDAO.buscaPorID(rs.getInt("USUARIO_USUA_ID")));
-                
+
                 /*Se o Usuario estiver vazio, entende que ele está deslogado. Desta forma, 
                 não será atribuido os dados das Correções*/
                 if (usuario != null) {
@@ -171,16 +177,13 @@ public class AtividadeDAO {
                     if (usuario.isCorretor()) {
                         //Através de CorrecaoDAO, localiza os dados da Correcao
                         obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
-                    } else {
-                        /*Se o usuario não for corretor, atribui a Correcao, para as atividades 
-                        que foram submetidas por ele*/
-                        if (usuario.getId() == obj.getIdUsuario()) {
-                            //Através de CorrecaoDAO, localiza os dados da Correcao
-                            obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
-                        }
+                    } else /*Se o usuario não for corretor, atribui a Correcao, para as atividades 
+                        que foram submetidas por ele*/ if (usuario.getId() == obj.getIdUsuario()) {
+                        //Através de CorrecaoDAO, localiza os dados da Correcao
+                        obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
                     }
                 }
-                
+
                 //Adiciona o objeto Atividade a lista de Atividades
                 lista.add(obj);
             }
@@ -190,9 +193,10 @@ public class AtividadeDAO {
         } catch (SQLException ex) {
             bd.desconectar();
             throw ex;
-        }finally{
+        } finally {
             correcaoDAO = null;
             usuarioDAO = null;
+            bd.desconectar();
         }
     }
 

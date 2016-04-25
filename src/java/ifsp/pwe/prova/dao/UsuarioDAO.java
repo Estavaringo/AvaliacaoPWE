@@ -15,14 +15,14 @@ import java.sql.SQLException;
  * @author Flávio e Gabriel
  */
 public class UsuarioDAO {
-    
+
     BancoDados bd = new BancoDados();
-    
+
     public void adiciona(Usuario usuario) throws SQLException {
         try {
             bd.conectar();
             int i = 0;
-            if(usuario.isCorretor()){
+            if (usuario.isCorretor()) {
                 i = 1;
             }
             String strSql
@@ -32,12 +32,10 @@ public class UsuarioDAO {
             p.setString(1, usuario.getNome());
             p.setString(2, usuario.getEmail());
             p.setString(3, usuario.getSenha());
-            
-            
+
             //Verificar tipo do atributo. No banco está como DATETIME.
             p.setString(4, usuario.getDataNascimento());
-            
-            
+
             p.setString(5, usuario.getEndereco());
             p.setInt(6, i);
             p.execute();
@@ -49,7 +47,7 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario buscaPorEmail(String email) throws SQLException{
+    public Usuario buscaPorEmail(String email) throws SQLException {
         try {
             Usuario obj = null;
             bd.conectar();
@@ -65,12 +63,12 @@ public class UsuarioDAO {
                 obj.setEmail(rs.getString("USUA_EMAIL"));
                 obj.setDataNascimento(rs.getString("USUA_DT"));
                 obj.setEndereco(rs.getString("USUA_ENDE"));
-                if(rs.getInt("USUA_CORRETOR") == 1){
+                if (rs.getInt("USUA_CORRETOR") == 1) {
                     obj.setCorretor(true);
-                }else{
+                } else {
                     obj.setCorretor(false);
                 }
-                
+
                 p.close();
                 bd.desconectar();
                 return obj;
@@ -84,7 +82,7 @@ public class UsuarioDAO {
         }
     }
 
-public Usuario buscaPorID(int id) throws SQLException{
+    public Usuario buscaPorID(int id) throws SQLException {
         try {
             Usuario obj = null;
             bd.conectar();
@@ -100,17 +98,18 @@ public Usuario buscaPorID(int id) throws SQLException{
                 obj.setEmail(rs.getString("USUA_EMAIL"));
                 obj.setDataNascimento(rs.getString("USUA_DT"));
                 obj.setEndereco(rs.getString("USUA_ENDE"));
-                if(rs.getInt("USUA_CORRETOR") == 1){
+                if (rs.getInt("USUA_CORRETOR") == 1) {
                     obj.setCorretor(true);
-                }else{
+                } else {
                     obj.setCorretor(false);
                 }
-                
+
                 p.close();
                 bd.desconectar();
                 return obj;
             }
             p.close();
+            rs.close();
             bd.desconectar();
             return obj;
         } catch (SQLException ex) {
@@ -118,5 +117,5 @@ public Usuario buscaPorID(int id) throws SQLException{
             throw ex;
         }
     }
-    
+
 }
