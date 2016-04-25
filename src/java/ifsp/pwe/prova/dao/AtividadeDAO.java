@@ -60,13 +60,17 @@ public class AtividadeDAO {
             bd.conectar();
             String strSQL = ""
                     + "SELECT "
-                    + " ATIV_ID, "
-                    + " ATIV_TITU, "
-                    + " ATIV_CORPO, "
-                    + " ATIV_DT, "
-                    + " USUARIO_USUA_ID "
+                    + " A.ATIV_ID, "
+                    + " A.ATIV_TITU, "
+                    + " A.ATIV_CORPO, "
+                    + " A.ATIV_DT, "
+                    + " A.USUARIO_USUA_ID, "
+                    + " B.USUA_NM, "
+                    + " B.USUA_CORRETOR "
                     + "FROM ATIVIDADE A "
-                    + "LEFT JOIN USUARIO B "
+                    + "INNER JOIN USUARIO B "
+                    + "ON A.USUARIO_USUA_ID = B.USUA_ID "
+                    + "LEFT JOIN CORRECAO C "
                     + "ON A.USUARIO_USUA_ID = B.USUA_ID "
                     + "WHERE ATIV_TITU LIKE ? ";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
@@ -77,11 +81,12 @@ public class AtividadeDAO {
                 obj.setId(rs.getInt("ATIV_ID"));
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
-
-                //Verificar tipo do atributo. No banco está como DATETIME.
                 obj.setDate(rs.getTimestamp("ATIV_DT"));
-
+                
+                //Preenche os dados do usuário que realizou a inclusão da atividade
                 obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
+                obj.setNomeUsuario(rs.getString("USUA_NM"));
+                
                 lista.add(obj);
             }
             p.close();
@@ -101,11 +106,12 @@ public class AtividadeDAO {
             bd.conectar();
             String strSQL = ""
                     + "SELECT "
-                    + " ATIV_ID, "
-                    + " ATIV_TITU, "
-                    + " ATIV_CORPO, "
-                    + " ATIV_DT, "
-                    + " USUARIO_USUA_ID "
+                    + " A.ATIV_ID, "
+                    + " A.ATIV_TITU, "
+                    + " A.ATIV_CORPO, "
+                    + " A.ATIV_DT, "
+                    + " A.USUARIO_USUA_ID, "
+                    + " B.USUA_NM "
                     + "FROM ATIVIDADE A "
                     + "LEFT JOIN USUARIO B "
                     + "ON A.USUARIO_USUA_ID = B.USUA_ID "
@@ -119,11 +125,12 @@ public class AtividadeDAO {
                 obj.setId(rs.getInt("ATIV_ID"));
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
-
-                //Verificar tipo do atributo. No banco está como DATETIME.
                 obj.setDate(rs.getTimestamp("ATIV_DT"));
 
+                //Preenche os dados do usuário que realizou a inclusão da atividade
                 obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
+                obj.setNomeUsuario(rs.getString("USUA_NM"));
+                
                 lista.add(obj);
             }
             p.close();
