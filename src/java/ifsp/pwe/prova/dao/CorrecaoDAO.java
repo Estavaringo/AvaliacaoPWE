@@ -91,7 +91,6 @@ public class CorrecaoDAO {
             }
             p.close();
             bd.desconectar();
-            rs.close();
             return listaCorrecao;
         } catch (SQLException ex) {
             bd.desconectar();
