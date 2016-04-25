@@ -19,7 +19,7 @@ public class Atividade {
     private String corpo;
     private Timestamp dataDeAdicao;
     private Usuario usuario = null;
-    private Correcao correcao = null;
+    private ArrayList<Correcao> correcao = null;
 
     /**
      * @return the id
@@ -99,11 +99,11 @@ public class Atividade {
         this.usuario = usuario;
     }
 
-    public Correcao getCorrecao() {
+    public ArrayList<Correcao> getCorrecao() {
         return correcao;
     }
 
-    public void setCorrecao(Correcao correcao) {
+    public void setCorrecao(ArrayList<Correcao> correcao) {
         this.correcao = correcao;
     }    
     
