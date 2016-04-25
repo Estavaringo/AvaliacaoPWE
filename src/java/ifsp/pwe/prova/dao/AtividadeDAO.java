@@ -97,7 +97,6 @@ public class AtividadeDAO {
                 lista.add(obj);
             }
             p.close();
-            rs.close();
             bd.desconectar();
             return lista;
         } catch (SQLException ex) {
