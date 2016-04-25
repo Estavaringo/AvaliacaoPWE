@@ -109,7 +109,6 @@ public class UsuarioDAO {
                 return obj;
             }
             p.close();
-            rs.close();
             bd.desconectar();
             return obj;
         } catch (SQLException ex) {
