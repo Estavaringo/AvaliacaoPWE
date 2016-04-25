@@ -64,10 +64,6 @@ public class AtividadeDAO {
     //Método que localiza todas as atividades pelo Titulo, implementando as regras de perfil de acesso
     public ArrayList<Atividade> buscaAtividadesPorTitulo(Usuario usuario, String titulo) throws SQLException {
 
-        //Instância as DAO de Usuario e Correcao
-        usuarioDAO = new UsuarioDAO();
-        correcaoDAO = new CorrecaoDAO();
-
         try {
             ArrayList<Atividade> lista = new ArrayList<Atividade>() {
             };
@@ -96,26 +92,6 @@ public class AtividadeDAO {
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
                 obj.setDataDeAdicao(rs.getTimestamp("ATIV_DT"));
-
-                //Através de UsuarioDAO, localiza os dados do Usuário
-                obj.setUsuario(usuarioDAO.buscaPorID(rs.getInt("USUARIO_USUA_ID")));
-
-                /*Se o Usuario estiver vazio, entende que ele está deslogado. Desta forma, 
-                não será atribuido os dados das Correções*/
-                if (usuario != null) {
-                    //Verifica se o usuario possui o Perfil de Corretor de Atividades.
-                    //Se o usuario for corretor, atribui todas as correções.
-                    if (usuario.isCorretor()) {
-                        //Através de CorrecaoDAO, localiza os dados da Correcao
-                        obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
-                        ArrayList<Correcao> listaTeste = obj.getCorrecao();
-                        System.out.println(listaTeste.size());
-                    } else /*Se o usuario não for corretor, atribui a Correcao, para as atividades 
-                        que foram submetidas por ele*/ if (usuario.getId() == obj.getIdUsuario()) {
-                        //Através de CorrecaoDAO, localiza os dados da Correcao
-                        obj.setCorrecao(correcaoDAO.buscaPorIDAtividade(obj.getId()));
-                    }
-                }
 
                 //Adiciona o objeto Atividade a lista de Atividades
                 lista.add(obj);
