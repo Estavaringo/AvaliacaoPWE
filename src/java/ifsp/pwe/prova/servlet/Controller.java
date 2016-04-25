@@ -24,30 +24,35 @@ public class Controller extends HttpServlet {
 
         if (tarefa == null) {
             throw new IllegalArgumentException("Você esqueceu de passar a tarefa!");
-        }
+            
+        } else if (tarefa.equals("CadastrarAtividade")) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/Paginas/CadastroAtividade.html");
+            requestDispatcher.forward(req, resp);
+        } else {
 
-        tarefa = "ifsp.pwe.prova.servlet." + tarefa;
+            tarefa = "ifsp.pwe.prova.servlet." + tarefa;
 
-        try {
-            Class<?> tipo = Class.forName(tarefa);
-            Tarefa instancia = (Tarefa) tipo.newInstance();
+            try {
+                Class<?> tipo = Class.forName(tarefa);
+                Tarefa instancia = (Tarefa) tipo.newInstance();
 
-            if (!VerificaPermissao.executa(req, resp, instancia)) {
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("Negado.html");
-                requestDispatcher.forward(req, resp);
-            } else {
+                if (!VerificaPermissao.executa(req, resp, instancia)) {
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("Negado.html");
+                    requestDispatcher.forward(req, resp);
+                } else {
 
-                String pagina = instancia.executa(req, resp);
+                    String pagina = instancia.executa(req, resp);
 
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher(pagina);
-                requestDispatcher.forward(req, resp);
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher(pagina);
+                    requestDispatcher.forward(req, resp);
+                }
+            } catch (ClassNotFoundException ex) {
+                throw new ServletException(ex);
+            } catch (InstantiationException ex) {
+                throw new ServletException(ex);
+            } catch (IllegalAccessException ex) {
+                throw new ServletException(ex);
             }
-        } catch (ClassNotFoundException ex) {
-            throw new ServletException(ex);
-        } catch (InstantiationException ex) {
-            throw new ServletException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new ServletException(ex);
         }
     }
 

@@ -34,7 +34,7 @@
                     <form method="POST" action="Executa">
                         <div class="form-group">
                             <button type="submit" class="btn btn-default" value="Cadastrar Atividade">Cadastrar Atividade</button>
-                            <input type="hidden" name="tarefa" value="NovaAtividade">
+                            <input type="hidden" name="tarefa" value="CadastrarAtividade">
                         </div></form>
                 </c:if>
 
