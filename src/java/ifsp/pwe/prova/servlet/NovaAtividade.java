@@ -23,20 +23,20 @@ public class NovaAtividade implements Tarefa {
     public String executa(HttpServletRequest req, HttpServletResponse resp) {
         //instancia uma nova atividade
         Atividade atividade = new Atividade();
-        
+
         //grava as informações da atividade no objeto
         atividade.setTitulo(req.getParameter("titulo"));
         atividade.setCorpo(req.getParameter("corpo"));
-        
+
         //armazena o id do usuario para aquela atividade
         HttpSession session = req.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         atividade.setIdUsuario(usuario.getId());
-        
+
         try {
             new AtividadeDAO().adiciona(atividade);
         } catch (SQLException ex) {
-            System.err.println("Erro ao consultar usuário no banco de dados. Detalhes: " + ex.getMessage());
+            System.err.println("Erro ao inserir atividade no banco de dados. Detalhes: " + ex.getMessage());
             return "Erro.html";
         }
 

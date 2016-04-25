@@ -33,13 +33,9 @@
                     <br><br>
                     <form method="POST" action="Executa">
                         <div class="form-group">
-                            <label>Cadastrar empresa:</label> 
-                            <input type="text" class="form-control" placeholder="Digite aqui o nome da empresa" name="empresa" value="" />
-                            <br>
-                            <button type="submit" class="btn btn-default" value="Cadastrar empresa">Cadastrar Empresa</button>
-                            <input type="hidden" name="tarefa" value="NovaEmpresa">
+                            <button type="submit" class="btn btn-default" value="Cadastrar Atividade">Cadastrar Atividade</button>
+                            <input type="hidden" name="tarefa" value="CadastrarAtividade">
                         </div></form>
-                    <button type="button" onclick="window.location.href = 'http://localhost:8084/AvaliacaoPWE/CadastroAtividade.html'" class="btn btn-default">Nova Atividade</a></button>
                 </c:if>
 
                 <c:if test="${empty usuarioLogado}">  

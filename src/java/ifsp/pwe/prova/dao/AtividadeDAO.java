@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * @author gabri
  */
 public class AtividadeDAO {
+
     java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
     BancoDados bd = new BancoDados();
 
@@ -38,11 +39,9 @@ public class AtividadeDAO {
                     = bd.connection.prepareStatement(strSql);
             p.setString(1, atividade.getTitulo());
             p.setString(2, atividade.getCorpo());
-            
-            
+
             p.setTimestamp(3, date);
-            
-            
+
             p.setInt(4, atividade.getIdUsuario());
             p.execute();
             p.close();
@@ -52,10 +51,12 @@ public class AtividadeDAO {
             throw ex;
         }
     }
+
     //Método que localiza todas as atividades que possuem um Titulo
     public ArrayList<Atividade> buscaPorTitulo(String filtro) throws SQLException {
         try {
-            ArrayList<Atividade> lista = new ArrayList<Atividade>() {};
+            ArrayList<Atividade> lista = new ArrayList<Atividade>() {
+            };
             bd.conectar();
             String strSQL = ""
                     + "SELECT "
@@ -76,10 +77,10 @@ public class AtividadeDAO {
                 obj.setId(rs.getInt("ATIV_ID"));
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
-              
+
                 //Verificar tipo do atributo. No banco está como DATETIME.
                 obj.setDate(rs.getTimestamp("ATIV_DT"));
-                
+
                 obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
                 lista.add(obj);
             }
@@ -92,10 +93,11 @@ public class AtividadeDAO {
         }
 
     }
-    
+
     public ArrayList<Atividade> buscaPorUsuario(Usuario usuario) throws SQLException {
         try {
-            ArrayList<Atividade> lista = new ArrayList<Atividade>() {};
+            ArrayList<Atividade> lista = new ArrayList<Atividade>() {
+            };
             bd.conectar();
             String strSQL = ""
                     + "SELECT "
@@ -117,10 +119,10 @@ public class AtividadeDAO {
                 obj.setId(rs.getInt("ATIV_ID"));
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
-              
+
                 //Verificar tipo do atributo. No banco está como DATETIME.
                 obj.setDate(rs.getTimestamp("ATIV_DT"));
-                
+
                 obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
                 lista.add(obj);
             }
