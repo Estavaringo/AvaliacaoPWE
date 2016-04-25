@@ -81,7 +81,8 @@
                                                 <input type="hidden" name="tarefa" value="VisualizarCorrecao">
                                                 <input type="hidden" name="correcao" value=${correcao.id}>
                                             </form>
-                                            </c:forEach></td>
+                                        </c:forEach></td>
+                                    
                                     
                                         <td> <form method="POST" action="Executa">
                                                 <button type="submit" class="btn btn-default" value="Incluir Correcao">Incluir Correcao</button>
