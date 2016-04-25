@@ -62,11 +62,11 @@
                 <br>
                 <form action="Executa" method="GET">
                     <div class="form-group">
-                        <label>Buscar empresa:</label> 
-                        <input type="text" class="form-control" placeholder="Digite aqui o nome da empresa" name="filtro">
+                        <label>Buscar atividade:</label> 
+                        <input type="text" class="form-control" placeholder="Digite aqui o titulo da atividade" name="filtro">
                         <br>
-                        <button type="submit" class="btn btn-default" value="Buscar Empresa">Buscar Empresa</button>
-                        <input type="hidden" name="tarefa" value="BuscaEmpresa">
+                        <button type="submit" class="btn btn-default" value="Buscar Atividade">Buscar Atividade</button>
+                        <input type="hidden" name="tarefa" value="BuscaAtividade">
                         </form>
 
                         <c:if test="${not empty usuarioLogado}">

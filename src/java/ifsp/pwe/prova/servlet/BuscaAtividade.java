@@ -32,7 +32,7 @@ public class BuscaAtividade implements Tarefa {
             Logger.getLogger(BuscaAtividade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "/WEB-INF/Paginas/BuscaAtividade.jsp";
+        return "/WEB-INF/Paginas/Atividades.jsp";
     }
 
     @Override

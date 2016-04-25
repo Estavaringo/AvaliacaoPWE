@@ -6,7 +6,6 @@
 package ifsp.pwe.prova.dao;
 
 import ifsp.pwe.prova.beans.Correcao;
-import ifsp.pwe.prova.beans.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +17,8 @@ import java.sql.SQLException;
 public class CorrecaoDAO {
 
     BancoDados bd = new BancoDados();
-    
-    public void adiciona(Correcao correcao) throws SQLException{
+
+    public void adiciona(Correcao correcao) throws SQLException {
         try {
             bd.conectar();
             String strSql
@@ -38,30 +37,21 @@ public class CorrecaoDAO {
             throw ex;
         }
     }
-    
-    
 
-    public Usuario buscaPorEmailESenha(String email, String senha) throws SQLException{
+    public Correcao buscaPorTituloAtividade(String titulo) throws SQLException {
         try {
-            Usuario obj = null;
+            Correcao obj = null;
             bd.conectar();
-            String strSQL = "SELECT USUA_NM, USUA_EMAIL, USUA_DT, USUA_ENDE, USUA_CORRETOR FROM USUARIO WHERE USUA_EMAIL = ? AND USUA_SENHA = ?";
+            String strSQL = "SELECT CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID FROM CORRECAO WHERE ATIVIDADE_ATIV_ID = (SELECT ATIV_ID FROM ATIVIDADE WHERE ATIV_TITU = ?);";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
-            p.setString(1, email);
-            p.setString(2, senha);
+            p.setString(1, titulo);
             ResultSet rs = p.executeQuery();
             if (rs.next()) {
-                obj = new Usuario();
-                obj.setNome(rs.getString("USUA_NM"));
-                obj.setEmail(rs.getString("USUA_EMAIL"));
-                obj.setNome(rs.getString("USUA_DT"));
-                obj.setNome(rs.getString("USUA_ENDE"));
-                if(rs.getString("USUA_COR").equals("1")){
-                    obj.setCorretor(true);
-                }else{
-                    obj.setCorretor(false);
-                }
-                
+                obj = new Correcao();
+                obj.setId(rs.getInt("CORR_ID"));
+                obj.setComentario(rs.getString("CORR_COMENTARIO"));
+                obj.setIdAtividade(rs.getInt("ATIVIDADE_ATIV_ID"));
+                obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
                 p.close();
                 bd.desconectar();
                 return obj;
@@ -74,5 +64,32 @@ public class CorrecaoDAO {
             throw ex;
         }
     }
-    
+
+    public Correcao buscaPorIDAtividade(int id) throws SQLException {
+        try {
+            Correcao obj = null;
+            bd.conectar();
+            String strSQL = "SELECT CORR_ID, CORR_COMENTARIO, ATIVIDADE_ATIV_ID, USUARIO_USUA_ID FROM CORRECAO WHERE ATIVIDADE_ATIV_ID = id;";
+            PreparedStatement p = bd.connection.prepareStatement(strSQL);
+            p.setInt(1, id);
+            ResultSet rs = p.executeQuery();
+            if (rs.next()) {
+                obj = new Correcao();
+                obj.setId(rs.getInt("CORR_ID"));
+                obj.setComentario(rs.getString("CORR_COMENTARIO"));
+                obj.setIdAtividade(rs.getInt("ATIVIDADE_ATIV_ID"));
+                obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
+                p.close();
+                bd.desconectar();
+                return obj;
+            }
+            p.close();
+            bd.desconectar();
+            return obj;
+        } catch (SQLException ex) {
+            bd.desconectar();
+            throw ex;
+        }
+    }
+
 }
