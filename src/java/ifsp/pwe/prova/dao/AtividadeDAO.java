@@ -64,7 +64,9 @@ public class AtividadeDAO {
                     + " ATIV_CORPO, "
                     + " ATIV_DT, "
                     + " USUARIO_USUA_ID "
-                    + "FROM ATIVIDADE "
+                    + "FROM ATIVIDADE A "
+                    + "LEFT JOIN USUARIO B "
+                    + "ON A.USUARIO_USUA_ID = B.USUA_ID "
                     + "WHERE ATIV_TITU LIKE ? ";
             PreparedStatement p = bd.connection.prepareStatement(strSQL);
             p.setString(1, "%" + filtro + "%");
@@ -97,11 +99,11 @@ public class AtividadeDAO {
             bd.conectar();
             String strSQL = ""
                     + "SELECT "
-                    + "ATIV_ID, "
-                    + "ATIV_TITU, "
-                    + "ATIV_CORPO, "
-                    + "ATIV_DT, "
-                    + "USUARIO_USUA_ID "
+                    + " ATIV_ID, "
+                    + " ATIV_TITU, "
+                    + " ATIV_CORPO, "
+                    + " ATIV_DT, "
+                    + " USUARIO_USUA_ID "
                     + "FROM ATIVIDADE A "
                     + "LEFT JOIN USUARIO B "
                     + "ON A.USUARIO_USUA_ID = B.USUA_ID "
