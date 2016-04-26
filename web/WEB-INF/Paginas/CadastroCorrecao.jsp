@@ -1,4 +1,8 @@
 
+<%@page import="java.util.Collection"%>
+<%@page import="ifsp.pwe.prova.beans.Atividade"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,12 +25,13 @@
 
 
                 <form method="POST" action="Executa">
-
+                    
                     <div class="form-group">
                         <label>Correção:</label> 
                         <input type="text" class="form-control" placeholder="Digite aqui o comentário sobre a atividade" name="comentario" value="" />
                     </div>
                     <input type="hidden" name="tarefa" value="NovaCorrecao">
+                    <input type="hidden" name="atividade" value=${atividade.id}>
                     <button type="submit" class="btn btn-default btn-xs" value="Incluir">Incluir Correcao</button>
                 </form>
             </div>

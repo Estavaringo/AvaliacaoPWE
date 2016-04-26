@@ -67,7 +67,6 @@
                         <br>
                         <button type="submit" class="btn btn-default" value="Buscar Atividade">Buscar Atividade</button>
                         <input type="hidden" name="tarefa" value="BuscaAtividade">
-                        <input type="hidden" name="busca" value="buscaPorTitulo">
                         </form>
 
 
