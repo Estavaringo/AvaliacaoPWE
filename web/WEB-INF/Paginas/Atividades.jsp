@@ -26,7 +26,7 @@
                 <br>
                 <c:if test="${not empty usuarioLogado}">
 
-                    <h2>Logado como ${usuarioLogado.nome}</h2>
+                    <h4>Logado como ${usuarioLogado.nome}</h4>
                     <br><br>
                     <form method="POST" action="Executa">
                         <div class="form-group">
@@ -56,13 +56,14 @@
                 <h3>Lista de Atividades</h3>
                 <table class="table-striped table-hover table-bordered text-center ">
                     <thead class="thead-inverse">
-                        <tr>
+                        <tr class="thead-inverse">
                             <td>Código</td>
                             <td>Título da Atividade</td>
                             <td>Descrição da Atividade</td>
                             <td>Data de Publicação</td>
                             <td>Inserido por</td>
-                            <td>Correção</td>                            
+                            <td>Correção</td>
+                            <td>Ação</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,16 +82,16 @@
                                                 <input type="hidden" name="tarefa" value="VisualizarCorrecao">
                                                 <input type="hidden" name="correcao" value=${correcao.id}>
                                             </form>
-                                        </c:forEach></td>
-                                    
-                                    
-                                        <td> <form method="POST" action="Executa">
-                                                <button type="submit" class="btn btn-default" value="Incluir Correcao">Incluir Correcao</button>
-                                                <input type="hidden" name="tarefa" value="CadastroCorrecao">
-                                                <input type="hidden" name="atividade" value=${atividade.id}>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                        </c:forEach>
+                                    </td>
+                                    <td> 
+                                        <form method="POST" action="Executa">
+                                            <button type="submit" class="btn btn-default" value="Incluir Correcao">Incluir Correcao</button>
+                                            <input type="hidden" name="tarefa" value="CadastroCorrecao">
+                                            <input type="hidden" name="atividade" value=${atividade.id}>
+                                        </form>
+                                    </td>
+                                </tr>
                                 </c:forEach>
                         </c:if>
                     </tbody>
