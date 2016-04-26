@@ -19,7 +19,6 @@ public class Atividade {
     private String titulo;
     private String corpo;
     private Timestamp dataDeAdicao;
-    private int idUsuario;
     private Usuario usuario = null;
     private ArrayList<Correcao> correcao = null;
 
@@ -101,14 +100,14 @@ public class Atividade {
      * @return the idUsuario
      */
     public int getIdUsuario() {
-        return idUsuario;
+        return usuario.getId();
     }
 
     /**
      * @param idUsuario the idUsuario to set
      */
     public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+        this.usuario.setId(idUsuario);
     }
     
 }
