@@ -29,7 +29,7 @@
                 <br><br>
                 <c:if test="${not empty usuarioLogado}">
 
-                    <h2>Logado como ${usuarioLogado.nome}</h2>
+                    <h4>Logado como ${usuarioLogado.nome}</h4>
                     <br><br>
                     <form method="POST" action="Executa">
                         <div class="form-group">
