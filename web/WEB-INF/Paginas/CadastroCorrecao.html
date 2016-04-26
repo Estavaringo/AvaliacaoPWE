@@ -12,29 +12,30 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="js/bootstrap.min.js"></script>
     </head>
-   
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 ">
-                <br>
-                <h2>Cadastro de Correcao</h2>
-                <br><br>
 
-
-                <form method="POST" action="Executa">
-
-                    <div class="form-group">
-                        <label>Correção:</label> 
-                        <input type="text" class="form-control" placeholder="Digite aqui o comentário sobre a atividade" name="comentario" value="" />
-                    </div>
-                    <input type="hidden" name="tarefa" value="NovaCorrecao">
-                    <button type="submit" class="btn btn-default btn-xs" value="Incluir">Incluir Correcao</button>
-                </form>
-            </div>
-        </div>
-
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 ">
+            <br>
+            <h2>Cadastro de Correcao</h2>
             <br><br>
-            <button type="button" onclick="window.location.href = 'http://localhost:8084/AvaliacaoPWE/'" class="btn btn-default">Voltar</a></button>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    </body>
+
+            <form method="POST" action="Executa">
+
+                <div class="form-group">
+                    <label>Correção:</label> 
+                    <input type="text" class="form-control" placeholder="Digite aqui o comentário sobre a atividade" name="comentario" value="" />
+                </div>
+                <input type="hidden" name="tarefa" value="NovaCorrecao">
+                <button type="submit" class="btn btn-default btn-xs" value="Incluir">Incluir Correcao</button>
+            </form>
+            <button type="button" onclick="window.location.href = '/AvaliacaoPWE/'" class="btn btn-default">Voltar</button>
+
+        </div>
+    </div>
+
+    <br><br>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</body>
 </html>
