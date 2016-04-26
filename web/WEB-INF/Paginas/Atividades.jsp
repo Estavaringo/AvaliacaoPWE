@@ -62,7 +62,7 @@
                             <td>Descrição da Atividade</td>
                             <td>Data de Publicação</td>
                             <td>Inserido por</td>
-                            <td>Correção</td>
+                            <td>Última Correção</td>
                             <td>Ação</td>
                         </tr>
                     </thead>
@@ -72,27 +72,38 @@
                                 <tr>
                                     <th scope="row">${atividade.id}</th>
                                     <td> ${atividade.titulo}</td>
-                                    <td> ${atividade.corpo} </td>
-                                    <td> ${atividade.dataDeAdicao} </td>
+                                    <td> ${atividade.corpo}</td>
+                                    <td> ${atividade.dataDeAdicao}</td>
                                     <td> ${atividade.usuario.nome}</td>
-                                    <td> 
-                                        <c:forEach var="correcao" items="${atividade.correcao}">
-                                            <form method="GET" action="Executa">
-                                                <button type="submit" class="btn btn-link" value="Incluir Correcao">${correcao.id}</button>
-                                                <input type="hidden" name="tarefa" value="VisualizarCorrecao">
-                                                <input type="hidden" name="correcao" value=${correcao.id}>
-                                            </form>
-                                        </c:forEach>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    ${atividade.correcao[0].comentario}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <form method="GET" action="Executa">
+                                                        <button type="submit" class="btn btn-link" value="Incluir Correcao">Visualizar Correções Anteriores</button>
+                                                        <input type="hidden" name="tarefa" value="VisualizarCorrecao">
+                                                        <input type="hidden" name="correcao" value=${correcao.id}>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
-                                    <td> 
-                                        <form method="POST" action="Executa">
-                                            <button type="submit" class="btn btn-default" value="Incluir Correcao">Incluir Correcao</button>
-                                            <input type="hidden" name="tarefa" value="CadastroCorrecao">
-                                            <input type="hidden" name="atividade" value=${atividade.id}>
-                                        </form>
+                                    <td>
+                                        <c:if test="${not empty atividade.usuario}">
+                                            <form method="POST" action="Executa">
+                                                <button type="submit" class="btn btn-default" value="Incluir Correcao">Incluir Correcao</button>
+                                                <input type="hidden" name="tarefa" value="CadastroCorrecao">
+                                                <input type="hidden" name="atividade" value=${atividade.id}>
+                                            </form>
+                                        </c:if>
                                     </td>
                                 </tr>
-                                </c:forEach>
+                            </c:forEach>
                         </c:if>
                     </tbody>
                 </table>
