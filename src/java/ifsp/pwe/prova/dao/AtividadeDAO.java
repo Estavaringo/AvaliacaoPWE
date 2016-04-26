@@ -92,6 +92,7 @@ public class AtividadeDAO {
                 obj.setTitulo(rs.getString("ATIV_TITU"));
                 obj.setCorpo(rs.getString("ATIV_CORPO"));
                 obj.setDataDeAdicao(rs.getTimestamp("ATIV_DT"));
+                obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
 
                 //Adiciona o objeto Atividade a lista de Atividades
                 lista.add(obj);

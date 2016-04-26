@@ -19,6 +19,7 @@ public class Atividade {
     private String titulo;
     private String corpo;
     private Timestamp dataDeAdicao;
+    private int idUsuario;
     private Usuario usuario = null;
     private ArrayList<Correcao> correcao = null;
 
@@ -78,19 +79,7 @@ public class Atividade {
         this.dataDeAdicao = dataDeAdicao;
     }
     
-    /**
-     * @return the Usuario.Id
-     */
-    public int getIdUsuario() {
-        return usuario.getId();
-    }
 
-    /**
-     * @param idUsuario the to set Usuario.Id
-     */
-    public void setIdUsuario(int idUsuario) {
-        this.usuario.setId(idUsuario);
-    }
     
     public Usuario getUsuario() {
         return usuario;
@@ -107,5 +96,19 @@ public class Atividade {
     public void setCorrecao(ArrayList<Correcao> correcao) {
         this.correcao = correcao;
     }    
+
+    /**
+     * @return the idUsuario
+     */
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
     
 }

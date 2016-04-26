@@ -30,6 +30,7 @@ public class Controller extends HttpServlet {
             requestDispatcher.forward(req, resp);
         } else if (tarefa.equals("CadastroCorrecao")) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/Paginas/CadastroCorrecao.html");
+            req.setAttribute("idAtividade", req.getParameter("atividade"));
             requestDispatcher.forward(req, resp);
         } else {
 

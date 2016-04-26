@@ -85,8 +85,6 @@ public class CorrecaoDAO {
                 obj.setComentario(rs.getString("CORR_COMENTARIO"));
                 obj.setIdAtividade(rs.getInt("ATIVIDADE_ATIV_ID"));
                 obj.setIdUsuario(rs.getInt("USUARIO_USUA_ID"));
-                p.close();
-                bd.desconectar();
                 listaCorrecao.add(obj);
             }
             p.close();
