@@ -19,8 +19,8 @@ public class Atividade {
     private String titulo;
     private String corpo;
     private Timestamp dataDeAdicao;
-    private Usuario usuario = null;
-    private ArrayList<Correcao> correcao = null;
+    private Usuario usuario = new Usuario();
+    private ArrayList<Correcao> correcao = new ArrayList<Correcao>();
 
     /**
      * @return the id
